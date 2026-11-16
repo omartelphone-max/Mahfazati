@@ -14,9 +14,14 @@ jobs:
           java-version: '17'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-      - name: Build APK
+      - name: Fix nativeCanvas
         run: |
           unzip Mahfazati-AndroidStudio-Project.zip -d app-src
+          FILE="app-src/Mahfazati/app/src/main/java/com/mahfazati/app/ui/Components.kt"
+          grep -q "import androidx.compose.ui.graphics.nativeCanvas" "$FILE" || sed -i '1i import androidx.compose.ui.graphics.nativeCanvas' "$FILE"
+          cat "$FILE" | head -n 20
+      - name: Build APK
+        run: |
           cd app-src/Mahfazati
           gradle assembleDebug
       - name: Upload APK
