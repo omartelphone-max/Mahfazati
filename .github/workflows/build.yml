@@ -12,14 +12,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
       - name: Build APK
         run: |
           unzip Mahfazati-AndroidStudio-Project.zip -d app-src
-          ls app-src
-          ls app-src/Mahfazati
           cd app-src/Mahfazati
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          gradle assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
