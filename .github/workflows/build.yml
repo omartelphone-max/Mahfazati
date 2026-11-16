@@ -18,8 +18,8 @@ jobs:
         run: |
           unzip Mahfazati-AndroidStudio-Project.zip -d app-src
           FILE="app-src/Mahfazati/app/src/main/java/com/mahfazati/app/ui/Components.kt"
-          grep -q "import androidx.compose.ui.graphics.nativeCanvas" "$FILE" || sed -i '1i import androidx.compose.ui.graphics.nativeCanvas' "$FILE"
-          cat "$FILE" | head -n 20
+          grep -q "import androidx.compose.ui.graphics.nativeCanvas" "$FILE" || sed -i '/^package /a import androidx.compose.ui.graphics.nativeCanvas' "$FILE"
+          head -n 10 "$FILE"
       - name: Build APK
         run: |
           cd app-src/Mahfazati
