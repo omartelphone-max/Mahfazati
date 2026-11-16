@@ -15,11 +15,13 @@ jobs:
       - name: Build APK
         run: |
           unzip Mahfazati-AndroidStudio-Project.zip -d app-src
-          cd app-src
+          ls app-src
+          ls app-src/Mahfazati
+          cd app-src/Mahfazati
           chmod +x gradlew
           ./gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mahfazati-APK
-          path: app-src/app/build/outputs/apk/debug/app-debug.apk
+          path: app-src/Mahfazati/app/build/outputs/apk/debug/app-debug.apk
